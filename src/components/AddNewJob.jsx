@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
+const BASE_URL = "https://lokeria.page.gd/api"; 
+
 export default function AddNewJob() {
     const { id: editId } = useParams();
     const navigate = useNavigate();
@@ -25,7 +27,7 @@ export default function AddNewJob() {
     // Ambil data kalau mode edit
     useEffect(() => {
         if (editId) {
-            axios.get(`https://final-project-api-alpha.vercel.app/api/jobs/${editId}`)
+            axios.get(`${BASE_URL}/get_job.php?id=${editId}`)
                 .then(res => {
                     const d = res.data;
                     setForm({
@@ -69,8 +71,8 @@ export default function AddNewJob() {
         }
 
         const url = editId
-            ? `https://final-project-api-alpha.vercel.app/api/jobs/${editId}`
-            : "https://final-project-api-alpha.vercel.app/api/jobs";
+            ? `${BASE_URL}/update_job.php?id=${editId}`
+            : `${BASE_URL}/add_job.php`;
         const method = editId ? "put" : "post";
 
         axios[method](url, form, {

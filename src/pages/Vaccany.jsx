@@ -18,9 +18,11 @@ export default function Vaccancy() {
     const [selectedCompany, setSelectedCompany] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
 
+    const BASE_URL = "https://lokeria.page.gd/api"; // endpoint InfinityFree
+
     useEffect(() => {
         setLoading(true);
-        axios.get("https://final-project-api-alpha.vercel.app/api/jobs")
+        axios.get(`${BASE_URL}/jobs.php`) // ganti ke PHP API
             .then((res) => {
                 setJobs(res.data);
                 setFilteredJobs(res.data);
